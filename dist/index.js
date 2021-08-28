@@ -26,6 +26,7 @@ function run() {
             core_1.info(`working directory: ${workingDir}`);
             // TODO:npmかyarnかのチェックを入れる
             yield exec_1.exec('npm install -g vue-tsc@0.0.25');
+            yield exec_1.exec('npm ci');
             yield exec_1.exec(`${nodeModulesPath}/vue-tsc/vue-tsc.js --pretty false --noEmit`);
             core_1.info('実行終わり');
             core_1.setOutput('time', new Date().toTimeString());
