@@ -10,6 +10,7 @@ async function run(): Promise<void> {
 
     // TODO:npmかyarnかのチェックを入れる
     await exec('npm install -g vue-tsc@0.0.25')
+    await exec('npm ci')
     await exec(`${nodeModulesPath}/vue-tsc/vue-tsc.js --pretty false --noEmit`)
     info('実行終わり')
     setOutput('time', new Date().toTimeString())
