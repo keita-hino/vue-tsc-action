@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  test-vue-tsc-job:
+    runs-on: ubuntu-latest
+    name: A job to vue tsc
+    steps:
+      # このリポジトリのプライベートアクションを使用するには
+      # リポジトリをチェックアウトする
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: vue-tsc check
+        uses: ./ # Uses an action in the root directory
+        id: hello
