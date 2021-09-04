@@ -1,0 +1,6 @@
+{
+  "name": "fixture",
+  "devDependencies": {
+    "vue-tsc": "^0.2.2"
+  }
+}

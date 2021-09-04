@@ -1,18 +1,50 @@
-import * as core from '@actions/core'
-import {wait} from './wait'
+import { info, setFailed, setOutput } from '@actions/core'
+import { exec } from '@actions/exec'
+import { runVueTscCli } from './runVueTscCli'
+import { existsVueTsc } from './existsVueTsc'
+import * as fs from 'fs'
+import * as path from 'path'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const workingDir = process.cwd()
+    info(`working directory: ${workingDir}`)
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const tsconfigPath = path.join(workingDir, 'tsconfig.json')
 
-    core.setOutput('time', new Date().toTimeString())
+    if (!fs.existsSync(tsconfigPath)) {
+      throw new Error(`could not find tsconfig.json at: ${tsconfigPath}`)
+    }
+
+    if (!existsVueTsc(workingDir)) {
+      throw new Error('could not find vue-tsc in package.json')
+    }
+
+    const existsYarnLock = fs.existsSync(path.resolve(workingDir, 'yarn.lock'))
+    const existsPackageLock = fs.existsSync(
+      path.resolve(workingDir, 'package-lock.json')
+    )
+
+    let installScript = `npm install --production=false`
+    if (existsYarnLock) {
+      installScript = `yarn --frozen-lockfile`
+    } else if (existsPackageLock) {
+      installScript = `npm ci`
+    }
+
+    await exec(installScript)
+
+    const { output } = await runVueTscCli(workingDir)
+
+    if (output) {
+      throw new Error(
+        'error after vue-tsc run. Please see the above log for details.'
+      )
+    }
+
+    setOutput('time', new Date().toTimeString())
   } catch (error) {
-    core.setFailed(error.message)
+    setFailed(error.message)
   }
 }
 
