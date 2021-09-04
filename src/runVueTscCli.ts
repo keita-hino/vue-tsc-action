@@ -1,6 +1,6 @@
-import { exec, ExecOptions } from '@actions/exec'
-import { setFailed } from '@actions/core'
 import * as path from 'path'
+import { ExecOptions, exec } from '@actions/exec'
+import { setFailed } from '@actions/core'
 
 export async function runVueTscCli(
   workingDir: string

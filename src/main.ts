@@ -1,9 +1,9 @@
-import { info, setFailed, setOutput } from '@actions/core'
-import { exec } from '@actions/exec'
-import { runVueTscCli } from './runVueTscCli'
-import { existsVueTsc } from './existsVueTsc'
 import * as fs from 'fs'
 import * as path from 'path'
+import { info, setFailed, setOutput } from '@actions/core'
+import { exec } from '@actions/exec'
+import { existsVueTsc } from './existsVueTsc'
+import { runVueTscCli } from './runVueTscCli'
 
 async function run(): Promise<void> {
   try {
