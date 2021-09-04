@@ -14,7 +14,7 @@ exports.existsVueTsc = void 0;
 const fs_1 = __importDefault(__nccwpck_require__(747));
 const path_1 = __nccwpck_require__(622);
 const findPackageJson = (path) => {
-    return fs_1.default.readFileSync(path_1.join(path, 'package.json')).toString();
+    return fs_1.default.readFileSync((0, path_1.join)(path, 'package.json')).toString();
 };
 const existsVueTsc = (path) => {
     const packageJson = JSON.parse(findPackageJson(path));
@@ -69,12 +69,12 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const workingDir = process.cwd();
-            core_1.info(`working directory: ${workingDir}`);
+            (0, core_1.info)(`working directory: ${workingDir}`);
             const tsconfigPath = path.join(workingDir, 'tsconfig.json');
             if (!fs.existsSync(tsconfigPath)) {
                 throw new Error(`could not find tsconfig.json at: ${tsconfigPath}`);
             }
-            if (!existsVueTsc_1.existsVueTsc(workingDir)) {
+            if (!(0, existsVueTsc_1.existsVueTsc)(workingDir)) {
                 throw new Error('could not find vue-tsc in package.json');
             }
             const existsYarnLock = fs.existsSync(path.resolve(workingDir, 'yarn.lock'));
@@ -86,15 +86,15 @@ function run() {
             else if (existsPackageLock) {
                 installScript = `npm ci`;
             }
-            yield exec_1.exec(installScript);
-            const { output } = yield runVueTscCli_1.runVueTscCli(workingDir);
+            yield (0, exec_1.exec)(installScript);
+            const { output } = yield (0, runVueTscCli_1.runVueTscCli)(workingDir);
             if (output) {
                 throw new Error('error after vue-tsc run. Please see the above log for details.');
             }
-            core_1.setOutput('time', new Date().toTimeString());
+            (0, core_1.setOutput)('time', new Date().toTimeString());
         }
         catch (error) {
-            core_1.setFailed(error.message);
+            (0, core_1.setFailed)(error.message);
         }
     });
 }
@@ -155,10 +155,10 @@ function runVueTscCli(workingDir) {
         };
         const execPath = path.join(workingDir, 'node_modules/vue-tsc/bin/vue-tsc.js');
         try {
-            yield exec_1.exec(`${execPath} --pretty false --noEmit`, [], options);
+            yield (0, exec_1.exec)(`${execPath} --pretty false --noEmit`, [], options);
         }
         catch (error) {
-            core_1.setFailed(error.message);
+            (0, core_1.setFailed)(error.message);
         }
         process.exitCode = 0;
         return {
