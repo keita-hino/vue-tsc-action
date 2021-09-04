@@ -1,6 +1,8 @@
 name: 'vue-tsc-action'
 description: 'Check vue-tsc errors.'
 author: 'keita-hino'
+icon: 'check'
+color: 'green'
 runs:
   using: 'node12'
   main: 'dist/index.js'
