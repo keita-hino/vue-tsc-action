@@ -1,6 +1,6 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'vue-tsc-action'
+description: 'Check vue-tsc errors.'
+author: 'keita-hino'
 runs:
   using: 'node12'
   main: 'dist/index.js'
