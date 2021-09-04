@@ -20,12 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: setup-node
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: 12
-      - name: vue-tsc-action
-        uses: keita-hino/vue-tsc-action@main
+      - uses: keita-hino/vue-tsc-action@main
 ```
 
 If there is an error, the error details will be displayed in the workflow execution log.
