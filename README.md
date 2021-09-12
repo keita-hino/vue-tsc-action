@@ -1,10 +1,6 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
-
 # vue-tsc-action
 
-This Github action is exec vue-tsc against `.vue` files and display the errors found in whole codebase.
+This Github action runs [vue-tsc](https://github.com/johnsoncodehk/vue-tsc) against `.vue` files and display the errors found in whole codebase.
 
 # Usage
 Add to your existing workflow file or create a new file named `.github/workflows/check_vue_tsc.yml` and copy over one of the examples below to your new workflow file.
