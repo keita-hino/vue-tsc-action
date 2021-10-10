@@ -1,6 +1,10 @@
 # vue-tsc-action
 
-This Github action runs [vue-tsc](https://github.com/johnsoncodehk/vue-tsc) against `.vue` files and display the errors found in whole codebase.
+This Github action runs [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc) against `.vue` files and display the errors found in whole codebase.
+
+# preparation
+1. Include [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc) in package.json
+2. Add tsconfig.json
 
 # Usage
 Add to your existing workflow file or create a new file named `.github/workflows/check_vue_tsc.yml` and copy over one of the examples below to your new workflow file.
