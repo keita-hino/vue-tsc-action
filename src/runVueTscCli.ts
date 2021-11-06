@@ -7,6 +7,10 @@ export async function runVueTscCli(
 ): Promise<{ output: string; error: string }> {
   let cliOutput = ''
   let cliError = ''
+  console.log('cliOutput')
+  console.log(cliOutput)
+  console.log('cliError')
+  console.log(cliError)
 
   const options: ExecOptions = {}
   options.listeners = {
