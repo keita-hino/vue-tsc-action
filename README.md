@@ -13,7 +13,7 @@ This is the simplest example to get it running:
 
 ```yml
 name: check-vue-tsc
-on: [push]
+on: push
 
 jobs:
   vue-tsc:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 14
       - uses: keita-hino/vue-tsc-action@main
 ```
 
