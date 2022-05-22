@@ -34,8 +34,9 @@ async function run(): Promise<void> {
 
     await exec(installScript)
 
-    const { output } = await runVueTscCli(workingDir)
+    const { output, summaryErrors } = await runVueTscCli(workingDir)
     info(`output: ${output}`)
+    info(`summaryErrors: ${summaryErrors}`)
 
     await summary
       .addHeading('Vue TSC Actions Results')

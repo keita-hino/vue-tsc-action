@@ -85,8 +85,9 @@ async function run() {
             installScript = `npm ci`;
         }
         await (0, exec_1.exec)(installScript);
-        const { output } = await (0, runVueTscCli_1.runVueTscCli)(workingDir);
+        const { output, summaryErrors } = await (0, runVueTscCli_1.runVueTscCli)(workingDir);
         (0, core_1.info)(`output: ${output}`);
+        (0, core_1.info)(`summaryErrors: ${summaryErrors}`);
         await core_1.summary
             .addHeading('Vue TSC Actions Results')
             // .addCodeBlock(generateTestResults(), "js")
@@ -148,6 +149,7 @@ const core_1 = __nccwpck_require__(186);
 async function runVueTscCli(workingDir) {
     let cliOutput = '';
     let cliError = '';
+    const summaryErrors = [];
     const options = {};
     options.listeners = {
         stdout: (data) => {
@@ -155,6 +157,7 @@ async function runVueTscCli(workingDir) {
         },
         stderr: (data) => {
             cliError += data.toString();
+            summaryErrors.push(data);
         }
     };
     const execPath = path.join(workingDir, 'node_modules/vue-tsc/bin/vue-tsc.js');
@@ -167,7 +170,8 @@ async function runVueTscCli(workingDir) {
     process.exitCode = 0;
     return {
         output: cliOutput,
-        error: cliError
+        error: cliError,
+        summaryErrors
     };
 }
 exports.runVueTscCli = runVueTscCli;
