@@ -41,12 +41,7 @@ async function run(): Promise<void> {
     await summary
       .addHeading('Vue TSC Actions Results')
       // .addCodeBlock(generateTestResults(), "js")
-      // .addTable([
-      //   [{data: 'File', header: true}, {data: 'Result', header: true}],
-      //   ['foo.js', 'Pass ✅'],
-      //   ['bar.js', 'Fail ❌'],
-      //   ['test.js', 'Pass ✅']
-      // ])
+      .addTable([[{ data: 'result', header: true }], summaryErrors])
       // .addLink('View staging deployment!', 'https://github.com')
       .write()
 

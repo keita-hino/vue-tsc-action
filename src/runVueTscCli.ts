@@ -4,10 +4,10 @@ import { setFailed } from '@actions/core'
 
 export async function runVueTscCli(
   workingDir: string
-): Promise<{ output: string; error: string; summaryErrors: Buffer[] }> {
+): Promise<{ output: string; error: string; summaryErrors: string[] }> {
   let cliOutput = ''
   let cliError = ''
-  const summaryErrors: Buffer[] = []
+  const summaryErrors: string[] = []
 
   const options: ExecOptions = {}
   options.listeners = {
@@ -16,7 +16,7 @@ export async function runVueTscCli(
     },
     stderr: (data: Buffer) => {
       cliError += data.toString()
-      summaryErrors.push(data)
+      summaryErrors.push(data.toString())
     }
   }
 

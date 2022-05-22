@@ -91,12 +91,10 @@ async function run() {
         await core_1.summary
             .addHeading('Vue TSC Actions Results')
             // .addCodeBlock(generateTestResults(), "js")
-            // .addTable([
-            //   [{data: 'File', header: true}, {data: 'Result', header: true}],
-            //   ['foo.js', 'Pass ✅'],
-            //   ['bar.js', 'Fail ❌'],
-            //   ['test.js', 'Pass ✅']
-            // ])
+            .addTable([
+            [{ data: 'result', header: true }],
+            summaryErrors
+        ])
             // .addLink('View staging deployment!', 'https://github.com')
             .write();
         if (output) {
@@ -157,7 +155,7 @@ async function runVueTscCli(workingDir) {
         },
         stderr: (data) => {
             cliError += data.toString();
-            summaryErrors.push(data);
+            summaryErrors.push(data.toString());
         }
     };
     const execPath = path.join(workingDir, 'node_modules/vue-tsc/bin/vue-tsc.js');
