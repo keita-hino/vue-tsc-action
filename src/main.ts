@@ -35,6 +35,19 @@ async function run(): Promise<void> {
     await exec(installScript)
 
     const { output } = await runVueTscCli(workingDir)
+    info(`output: ${output}`)
+
+    // await summary
+    //   .addHeading('Vue TSC Actions Results')
+    //   .addCodeBlock(generateTestResults(), "js")
+    //   .addTable([
+    //     [{data: 'File', header: true}, {data: 'Result', header: true}],
+    //     ['foo.js', 'Pass ✅'],
+    //     ['bar.js', 'Fail ❌'],
+    //     ['test.js', 'Pass ✅']
+    //   ])
+    //   .addLink('View staging deployment!', 'https://github.com')
+    //   .write()
 
     if (output) {
       throw new Error(
