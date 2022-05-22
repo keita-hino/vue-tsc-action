@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-import { info, setFailed, setOutput } from '@actions/core'
+import { info, setFailed, setOutput, summary } from '@actions/core'
 import { exec } from '@actions/exec'
 import { existsVueTsc } from './existsVueTsc'
 import { runVueTscCli } from './runVueTscCli'
@@ -37,17 +37,17 @@ async function run(): Promise<void> {
     const { output } = await runVueTscCli(workingDir)
     info(`output: ${output}`)
 
-    // await summary
-    //   .addHeading('Vue TSC Actions Results')
-    //   .addCodeBlock(generateTestResults(), "js")
-    //   .addTable([
-    //     [{data: 'File', header: true}, {data: 'Result', header: true}],
-    //     ['foo.js', 'Pass ✅'],
-    //     ['bar.js', 'Fail ❌'],
-    //     ['test.js', 'Pass ✅']
-    //   ])
-    //   .addLink('View staging deployment!', 'https://github.com')
-    //   .write()
+    await summary
+      .addHeading('Vue TSC Actions Results')
+      // .addCodeBlock(generateTestResults(), "js")
+      // .addTable([
+      //   [{data: 'File', header: true}, {data: 'Result', header: true}],
+      //   ['foo.js', 'Pass ✅'],
+      //   ['bar.js', 'Fail ❌'],
+      //   ['test.js', 'Pass ✅']
+      // ])
+      // .addLink('View staging deployment!', 'https://github.com')
+      .write()
 
     if (output) {
       throw new Error(

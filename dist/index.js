@@ -87,17 +87,17 @@ async function run() {
         await (0, exec_1.exec)(installScript);
         const { output } = await (0, runVueTscCli_1.runVueTscCli)(workingDir);
         (0, core_1.info)(`output: ${output}`);
-        // await summary
-        //   .addHeading('Vue TSC Actions Results')
-        //   .addCodeBlock(generateTestResults(), "js")
-        //   .addTable([
-        //     [{data: 'File', header: true}, {data: 'Result', header: true}],
-        //     ['foo.js', 'Pass ✅'],
-        //     ['bar.js', 'Fail ❌'],
-        //     ['test.js', 'Pass ✅']
-        //   ])
-        //   .addLink('View staging deployment!', 'https://github.com')
-        //   .write()
+        await core_1.summary
+            .addHeading('Vue TSC Actions Results')
+            // .addCodeBlock(generateTestResults(), "js")
+            // .addTable([
+            //   [{data: 'File', header: true}, {data: 'Result', header: true}],
+            //   ['foo.js', 'Pass ✅'],
+            //   ['bar.js', 'Fail ❌'],
+            //   ['test.js', 'Pass ✅']
+            // ])
+            // .addLink('View staging deployment!', 'https://github.com')
+            .write();
         if (output) {
             throw new Error('error after vue-tsc run. Please see the above log for details.');
         }
